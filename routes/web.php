@@ -2,12 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return response()->json([
-        'data'=> \App\Models\User::all()
-    ]);
-});
+Route::get('/', [\App\Http\Controllers\AccountController::class,"getAccount"]);
+Route::post('/register',[\App\Http\Controllers\AccountController::class,"createAccount"]);
 
-Route::post('/register',function(){
-
+Route::get('/csrf-token', function() {
+    return csrf_token();
 });
