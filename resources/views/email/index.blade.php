@@ -7,9 +7,9 @@
     <title>Email Sent</title>
 </head>
 <body>
-    <h3>Thank You for registering in our website!</h3>
-    <h3>Here are the qr code.</h3>
-    <img style="width:200px;height:200px;" src="https://musiclinguateachers.com/wp-content/uploads/2016/09/qrcode.png" alt="">
-    <p>{{ $data['body'] }}</p>
+    <h1>Thank You for registering on our website!</h1>
+    <p>Feel free to download the attached QR code file.</p>
+
+    <h3>---- No QR yet ----</h3>
 </body>
 </html>

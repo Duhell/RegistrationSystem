@@ -8,3 +8,7 @@ Route::post('/register',[\App\Http\Controllers\AccountController::class,"createA
 Route::get('/csrf-token', function() {
     return csrf_token();
 });
+
+Route::get('/test', function() {
+    return view('email.index');
+});
