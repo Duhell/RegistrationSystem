@@ -5,18 +5,38 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AccountRequest;
 use App\Mail\NewRegisteredAccount;
 use Exception;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Ramsey\Uuid\Uuid;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class AccountController extends Controller
 {
-    public function getAccount()
+    public function getAccount(?string $id = null)
     {
-        return response()->json([
-            'data'=> \App\Models\User::all()
-        ]);
+        $response = array();
+
+        if($id == null){
+            return view('Registration');
+        }else{
+            $data = \App\Models\User::where('user_UUID',$id)->first();
+
+            if(!$data){
+                $response = [
+                    "user"=> null,
+                    'msg'=> "User not found!",
+                    'status_code'=> 404
+                ];
+            }else{
+                $response = [
+                    'user'=>$data,
+                    'msg'=>"Confirmed!",
+                    'status_code'=> 200
+                ];
+            }
+        }
+
+        return view('Confirmation')->with('response',$response);
     }
 
     public function createAccount(AccountRequest $request)
@@ -24,6 +44,7 @@ class AccountController extends Controller
         $validatedDataRequest = $request->validated();
         try{
             $user = new \App\Models\User;
+            $user->user_UUID = Uuid::uuid4()->toString();
             $user->fill($validatedDataRequest);
             $user->fullname = $validatedDataRequest['firstname']." ".$validatedDataRequest['lastname'];
             $user->password = Hash::make($validatedDataRequest['password']);
