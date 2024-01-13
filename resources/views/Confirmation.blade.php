@@ -1,13 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Confirm</title>
-</head>
-<body>
-    <h1>This user has record in the database!</h1>
-    <h4>{{ $response['msg'] }}</h4>
-</body>
-</html>
+@extends('layout.main')
+@section('title','Registered')
+@section('content')
+    <div id="confirmContainer">
+        <div id="msg">
+            <p>{{ $response['msg'] }}</p>
+        </div>
+    </div>
+@endsection

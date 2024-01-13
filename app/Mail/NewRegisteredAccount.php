@@ -9,7 +9,6 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Mail\Mailables\Attachment;
-use Illuminate\Support\Facades\Log;
 
 class NewRegisteredAccount extends Mailable
 {
@@ -19,7 +18,6 @@ class NewRegisteredAccount extends Mailable
     public function __construct(array $data)
     {
         $this->data = $data;
-        Log::error("data",$data);
     }
 
     public function envelope(): Envelope
@@ -33,10 +31,7 @@ class NewRegisteredAccount extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'email.index',
-            with:[
-                'data'=> $this->data
-            ]
+            view: 'email.index'
         );
     }
 

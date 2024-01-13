@@ -56,7 +56,7 @@ class AccountController extends Controller
                 }
                 $qr_filename = $validatedDataRequest['firstname']."_".uniqid() . '.png';
                 $qrcodePath = $qrcodeDirectory . $qr_filename;
-                QrCode::format('png')->size(150)->generate('https://www.google.com', public_path($qrcodePath));
+                QrCode::format('png')->size(150)->generate('http://192.168.249.129:8000/'.$user->user_UUID, public_path($qrcodePath));
 
                 $user->qrcodepath = $qrcodePath;
                 $user->save();
